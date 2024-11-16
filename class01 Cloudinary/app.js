@@ -62,11 +62,15 @@ function uploadFile(file) {
     .then((data) => {
       // File uploaded successfully
       const url = data.secure_url;
+      console.log(data);
+      const transformed=url.replace('/upload/','/upload/w_50,c_scale')
+      
       // Create a thumbnail of the uploaded image, with 150px width
-      const tokens = url.split('/');
-      tokens.splice(-3, 0, 'w_150,c_scale');
+    //   const tokens = url.split('/');
+    //   tokens.splice(-3, 0, 'w_150,c_scale');
       const img = new Image();
-      img.src = tokens.join('/');
+    //   img.src = tokens.join('/');
+    img.src=url;
       img.alt = data.public_id;
       document.getElementById('gallery').appendChild(img);
     })
