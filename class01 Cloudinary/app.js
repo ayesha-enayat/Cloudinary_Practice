@@ -9,14 +9,14 @@ const fileElem = document.getElementById("fileElem");
 const urlSelect = document.getElementById("urlSelect");
 const dropbox = document.getElementById("dropbox");
 
-fileSelect.addEventListener("click", function(e) {
+fileSelect.addEventListener("click", function (e) {
   if (fileElem) {
     fileElem.click();
   }
   e.preventDefault(); // prevent navigation to "#"
 }, false);
 
-urlSelect.addEventListener("click", function(e) {
+urlSelect.addEventListener("click", function (e) {
   uploadFile('https://res.cloudinary.com/drqug4csh/image/upload/sample.jpg');
   e.preventDefault(); // prevent navigation to "#"
 }, false);
@@ -63,14 +63,15 @@ function uploadFile(file) {
       // File uploaded successfully
       const url = data.secure_url;
       console.log(data);
-      const transformed=url.replace('/upload/','/upload/w_50,c_scale')
-      
+      const transformedURL = url.replace('/upload/', '/upload/w_50,c_scale/')
+
       // Create a thumbnail of the uploaded image, with 150px width
-    //   const tokens = url.split('/');
-    //   tokens.splice(-3, 0, 'w_150,c_scale');
+      //   const tokens = url.split('/');
+      //   tokens.splice(-3, 0, 'w_150,c_scale');
       const img = new Image();
-    //   img.src = tokens.join('/');
-    img.src=url;
+      //   img.src = tokens.join('/');
+      // img.src = url;
+      img.src=transformedURL;
       img.alt = data.public_id;
       document.getElementById('gallery').appendChild(img);
     })
@@ -80,7 +81,7 @@ function uploadFile(file) {
 }
 
 // *********** Handle selected files ******************** //
-const handleFiles = function(files) {
+const handleFiles = function (files) {
   for (let i = 0; i < files.length; i++) {
     uploadFile(files[i]); // call the function to upload the file
   }
